@@ -11,6 +11,7 @@
     "date-fns": "2.13.0",
     "font-awesome": "4.7.0",
     "mdbreact": "4.25.1",
+    "node-sass": "^4.14.1",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-md": "1.14.1",
