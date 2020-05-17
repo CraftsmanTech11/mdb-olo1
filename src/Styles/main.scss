@@ -606,6 +606,66 @@ img {
   /* background-color: rgba(255, 255, 255, 0.22); */
   background-color: $transBlack;
   z-index: 848;
+  select.browser-default.custom-select {
+    height: 40px;
+    margin-bottom: 15px;
+  }
+  .radios2 { 
+    margin-top: 8px ;
+    .form-inline .form-check,.form-control {width:initial}
+  }
+  .time-pick {
+
+    & > div {
+      display: block !important;
+    padding: 4px 12px;
+    background: #fff;
+    border-radius: 3px;
+     input {
+      background: inherit;
+      height: 20px;
+  }
+    }
+  }
+}
+
+.gallery-section {
+  max-height:300px;
+  overflow: hidden;
+  padding: 0 20px;
+  .alice-carousel {
+    top:20px;
+  }
+}
+// _________________________________footer_____________
+.footer-section {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width:100%;
+  box-shadow: 0 -2px 5px 1px #b9b9b9;
+
+  .foot {
+    background-color:rgb(255, 255, 255);
+    justify-content: space-around;
+    a.label {text-align:center; display:inline-flex;
+      padding: 6px;flex-direction:column;
+       color:#292929 ;
+       text-decoration: none;
+       font-size: 0.9rem !important;
+       &:hover {
+        color: $primary;
+        transition: all 200ms ease-out;
+       }
+       }
+    .foot-ico { 
+      width: 20%;
+      height:auto;
+      margin-bottom: 8px;
+      margin:auto;
+
+    }
+  }
 }
 .find-address {
   color: #847577;
@@ -661,7 +721,7 @@ img {
     border-radius: 3px;
     background: transparent;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    padding: 14px 30px;
+    padding: 10px 30px;
     cursor: pointer;
     margin-top: 18px;
     border: 1px solid $primary;

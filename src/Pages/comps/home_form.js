@@ -4,12 +4,36 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { getDataWithTypeAction } from "../../Store/Actions/restListAction";
 import { parse, isAfter, addMinutes, format } from "date-fns";
-import { MDBTimePicker, MDBBtn, MDBInput, MDBFormInline } from "mdbreact";
+import {
+  MDBTimePicker,
+  MDBBtn,
+  MDBInput,
+  MDBFormInline,
+  MDBModal
+} from "mdbreact";
 import { DropdownA } from "../../Comps/UI/form_comps";
 import { d_homeDetails } from "../../Constants/dummy";
+import TimeInput from "material-ui-time-picker";
 
 class HomeForm extends React.Component {
-  state = {};
+  state = {
+    location: {
+      Strloclatitude: "",
+      strLocLongitude: ""
+    },
+    formatedAdd: {},
+    pickupTime: null,
+    openPicker: false,
+    selectedCity: "",
+    selectedArea: "",
+    selectedRest: "",
+    allCities: [],
+    AllLocations: [],
+    restList: { RestaurantDeliveryList: [], StatusCode: 0 },
+    pickStatus: "pickup",
+    isLocation: false,
+    errorObj: { errorMsg: "", isError: false }
+  };
 
   alertError = errorObj => {
     this.setState({ errorObj: { ...errorObj } });
@@ -174,7 +198,7 @@ class HomeForm extends React.Component {
   render() {
     const homeDetails = d_homeDetails;
     return (
-      <form>
+      <div>
         <div className="form-box">
           <DropdownA
             value={this.state.selectedCity}
@@ -221,26 +245,14 @@ class HomeForm extends React.Component {
               }
             )}
           </DropdownA>
-          <div className="pickup-time">
-            {/* <MDBTimePicker
-              id="time-picker"
-              label="Pickup Time"
+          <div className="time-pick">
+            <TimeInput
+              mode="12h"
               value={this.state.pickupTime}
+              onChange={time => this.handleDateChange(time)}
               open={this.state.openPicker}
-              getValue={this.handleDateChange}
-              onClose={() => this.setState({ openPicker: false })}
-            /> */}
-            <MDBBtn
-              outline
-              color="primary"
-              fullWidth
-              disableRipple
-              disabled={this.state.selectedRest === ""}
-              onClick={() => this.setState({ openPicker: true })}
-            >
-              Pickup time
-              {/* format(this.state.pickupTime, "h:mm a").toString() */}
-            </MDBBtn>
+              placeholder="pickup time"
+            />
           </div>
 
           <div className="radios2">
@@ -269,7 +281,7 @@ class HomeForm extends React.Component {
             Place Order
           </button>
         </div>
-      </form>
+      </div>
     );
   }
 }

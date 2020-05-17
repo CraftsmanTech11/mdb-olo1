@@ -50,7 +50,7 @@ class BannerSection extends Component {
         <div className="container banner-contiainer">
           <div className="row">
             <div className="col-lg-8 col-md-6 col-sm-12">
-              <div className="logo-container d-none d-sm-block">
+              <div className="logo-container">
                 <img
                   className="pc-logo img-fluid "
                   src={imgBase + homeDetails.StrRestaurantLogo + ".jpg"}
@@ -58,9 +58,6 @@ class BannerSection extends Component {
                   alt="logo"
                 />
               </div>
-              <h6 className="d-block d-sm-none exeption mt-0 mb-4">
-                Specify your address to suggest you the fast delivery
-              </h6>
               <div className="left-text-b">
                 <h1 className="title">{homeDetails.StrAccountDisplayMsg}</h1>
                 <p className="safety-txt"> {homeDetails.StrDisplayText} </p>

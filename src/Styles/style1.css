@@ -163,10 +163,10 @@ label {
   font-weight: 400;
   color: #aaaaaa;
 }
-.label {
+/* .label {
   color: #fff !important;
   font-size: 9px !important;
-}
+} */
 /* input:focus {
   background: #fff;
   border: 1px solid #ffa803;
