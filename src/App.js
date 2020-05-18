@@ -5,6 +5,7 @@ import { store } from "./Store/Store";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AlertDialog } from "./Comps/UI/Modal";
 import OloHome from "./Pages/Olo_home";
+import RestDetails from "./Pages/RestDetails";
 
 const NavbarPage = () => {
   const [errorObj, setError] = useState({ txt: "", open: false });
@@ -14,6 +15,7 @@ const NavbarPage = () => {
       <Router>
         {/* <Appbar /> */}
         <Switch>
+          <Route path="/restdetails/:id" component={RestDetails} />
           <Route path="/" component={OloHome} />
         </Switch>
         <AlertDialog

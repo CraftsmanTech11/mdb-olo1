@@ -599,7 +599,6 @@ blockquote {
 }
 .nav-link {
   display: block;
-  padding: 0px;
 }
 .nav-text {
   font-size: 14px;
@@ -3829,7 +3828,7 @@ button.b-btn {
   padding: 0px;
 }
 
-.order-tabs {
+/* .order-tabs {
   margin: 20px 0px;
   display: flex;
   flex-grow: 1;
@@ -3840,7 +3839,6 @@ button.b-btn {
   font-size: 14px;
   font-weight: 400;
   color: #847577;
-  padding: 0px;
 }
 .order-tabs .nav-tabs {
   border: none;
@@ -3883,7 +3881,7 @@ button.b-btn {
 }
 .meals-dt:not(:first-of-type) {
   margin-top: 20px;
-}
+} */
 
 .spinner {
   float: left;

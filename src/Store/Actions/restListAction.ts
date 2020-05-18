@@ -2,8 +2,56 @@ import { BaseApi,androidHeader } from '../../Constants/OloApi'
 import axios from 'axios'
 // import * as oloApi from "../../Constants/OloApi";
 
-
-export function getDataWithTypeAction(queryParams, url,type,others?) {
+export function getLocationAction() {
+  
+  const type = 'location'
+  return (dispatch) => {
+    dispatch({ type: `${type}_USER_LOADING`, shortType:type})
+    const getLoc = ()=>  {
+      return new Promise( (resolve, reject)=> {
+      
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(resolve, reject)
+        
+      } else {
+        reject( (error) => {
+          return  dispatch({ type: `${type}_USER_FAILURE`, payload: {errorObj:error, message:"Sorry, browser does not support geolocation!"} , shortType:type })
+        })
+      }
+    })
+  }
+  return getLoc()
+  .then((position) => {
+    let { latitude, longitude } = position.coords;       
+    return dispatch({ type: `${type}_USER_SUCCESS`, payload: {[type]:{
+      Strloclatitude: latitude,
+      strLocLongitude: longitude,
+    }}, shortType:type }) 
+  })
+  .catch((error) => {
+    
+    let message = "";
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        message = "User denied the request for Geolocation.";
+        break;
+      case error.POSITION_UNAVAILABLE:
+        message = "Location information is unavailable.";
+        break;
+      case error.TIMEOUT:
+        message = "The request to get user location timed out.";
+        break;
+      case error.UNKNOWN_ERROR:
+        message = "An unknown error occurred.";
+        break;
+    }
+    return  dispatch({ type: `${type}_USER_FAILURE`, payload: {errorObj:error, message} , shortType:type })
+  });
+  }
+  
+  
+}
+export function getDataWithPageAction(queryParams, url,type) {
 
   return (dispatch) => {
     const options = {
@@ -12,19 +60,6 @@ export function getDataWithTypeAction(queryParams, url,type,others?) {
         ...queryParams,
       }
     };
-    if(others && others.minLoading )
-    {
-      dispatch({ type: `${type}_MIN_LOADING`, shortType:type,loadCode:others.loadCode});
-      return axios.get(BaseApi + url, { ...options, })
-      .then((resp) => {
-        return dispatch({ type: `${type}_MIN_SUCCESS`, payload: {[type]:resp.data}, shortType:type })
-      })
-      .catch(err=>{
-        return  dispatch({ type: `${type}_MIN_FAILURE`, payload: {errorObj:err} , shortType:type })
-      } )
-    }
-
-    else {
       dispatch({ type: `${type}_LOADING`, shortType:type});
       return axios.get(BaseApi + url, { ...options, })
       .then((resp) => {
@@ -35,7 +70,28 @@ export function getDataWithTypeAction(queryParams, url,type,others?) {
       } )
     }
   }
-}
+
+
+export function getDataWithTypeAction(queryParams, url,type,others) {
+
+  return (dispatch) => {
+    const options = {
+      headers: { ...androidHeader },
+      params: {
+        ...queryParams,
+      }
+    };
+      dispatch({ type: `${type}_MIN_LOADING`, shortType:type,loadCode:others.loadCode});
+      return axios.get(BaseApi + url, { ...options, })
+      .then((resp) => {
+        return dispatch({ type: `${type}_MIN_SUCCESS`, payload: {[type]:resp.data}, shortType:type })
+      })
+      .catch(err=>{
+        return  dispatch({ type: `${type}_MIN_FAILURE`, payload: {errorObj:err} , shortType:type })
+      } )
+    }
+  }
+
 //2axios.all
 export function getDataWithTypeAllAction(queryParams:any[], url,type,list) {  
   return (dispatch) => {
