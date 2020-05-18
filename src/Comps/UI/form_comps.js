@@ -11,3 +11,21 @@ export class DropdownA extends Component {
     );
   }
 }
+
+export const Counter = props => {
+  return (
+    <table className="" id="counter" style={{}}>
+      <tbody>
+        <tr>
+          <td className="actions" onClick={props.upgrader}>
+            <i className="fa fa-minus" />
+          </td>
+          <td className="val">{props.count}</td>
+          <td className="actions" onClick={props.degrader}>
+            <i className="fa fa-plus" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  );
+};

@@ -1,18 +1,11 @@
 import React from "react";
-import {
-  MDBContainer,
-  MDBBtn,
-  MDBModal,
-  MDBModalBody,
-  MDBModalHeader,
-  MDBModalFooter
-} from "mdbreact";
+import { MDBModal, MDBModalBody, MDBModalHeader } from "mdbreact";
 
 export function AlertDialog(props) {
   const { txt, open, handleClose } = props;
   return (
     <MDBModal isOpen={open} toggle={handleClose}>
-      {this.props.header && (
+      {props.header && (
         <MDBModalHeader toggle={handleClose}>MDBModal title</MDBModalHeader>
       )}
       <MDBModalBody>
